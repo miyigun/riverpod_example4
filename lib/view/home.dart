@@ -6,6 +6,22 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Riverpod Example'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Center(
+          child: ListView.builder(
+              itemBuilder: (context,index){
+                return Text(
+
+                );
+              }
+          ),
+        ),
+      ),
+    );
   }
 }
