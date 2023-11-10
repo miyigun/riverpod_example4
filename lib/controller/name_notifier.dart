@@ -1,20 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NameNotifier extends StateNotifier<List<String>>{
+class NameNotifier extends StateNotifier<List<String>> {
   NameNotifier() : super([]);
 
   void addNames(String names) {
-    state= [...state, names];
+    state = [...state, names];
   }
 
   void deleteNames(String names) {
-    state= [
+    state = [
       for (final loopNames in state)
-        if (names!=loopNames) loopNames,
+        if (names != loopNames) loopNames,
     ];
   }
 }
 
-final nameNotifierProvider=StateNotifierProvider((ref){
+final nameNotifierProvider =
+    StateNotifierProvider<NameNotifier, List<String>>((ref) {
   return NameNotifier();
 });

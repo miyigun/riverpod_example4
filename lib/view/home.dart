@@ -7,7 +7,9 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nameStateNotifierProvider=ref.watch(nameNotifierProvider.notifier).state;
+    final nameStateNotifierProviderWatch = ref.watch(nameNotifierProvider);
+    final nameStateNotifierProviderRead =
+        ref.read(nameNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -17,22 +19,23 @@ class Home extends ConsumerWidget {
         padding: const EdgeInsets.all(18.0),
         child: Center(
           child: ListView.builder(
-            itemCount: nameStateNotifierProvider.length,
-              itemBuilder: (context,index){
-                return Text(
-                  nameStateNotifierProvider[index].toString(),
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
+            itemCount: nameStateNotifierProviderWatch.length,
+            itemBuilder: (context, index) {
+              return Text(
+                nameStateNotifierProviderWatch[index].toString(),
+                style: const TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            },
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=> ref.read(nameNotifierProvider.notifier).addNames('Now you can add as many names as you want!'),
-          child: Icon(Icons.add),
+        onPressed: () => nameStateNotifierProviderRead
+            .addNames('Now you can add as many names as you want!'),
+        child: const Icon(Icons.add),
       ),
     );
   }
